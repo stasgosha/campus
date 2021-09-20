@@ -25,95 +25,30 @@ $(document).ready(function(){
 		});
 	}
     
-    // Video
-    $('.video-block:not([data-video-modal])').on('click', function () {
-        $(this).addClass('playing');
-        $(this).find('.block-overlay').fadeOut(300);
+// Video
+$('.video-block:not([data-video-modal])').on('click', function () {
+    $(this).addClass('playing');
+    $(this).find('.block-overlay').fadeOut(300);
 
-        let videoId = $(this).find('.play-btn').data('video-id');
+    let videoId = $(this).find('.play-btn').data('video-id');
 
-        if (!videoId) {
-            videoId = $(this).data('video-id');
-        }
-
-        if (videoId == undefined) {
-            $(this).find('video')[0].play();
-        } else{
-            let videoType = $(this).data('video-type') ? $(this).data('video-type').toLowerCase() : 'youtube';
-
-            if (videoType == 'youtube') {
-                $(this).find('.block-video-container').append('<div class="video-iframe" id="'+videoId+'"></div>');
-                createVideo(videoId, videoId);
-            } else if(videoType == 'vimeo'){
-                $(this).find('.block-video-container').append('<div class="video-iframe" id="'+videoId+'"><iframe allow="autoplay" class="video-iframe" src="https://player.vimeo.com/video/'+videoId+'?playsinline=1&autoplay=1&transparent=0&app_id=122963"></div>');
-            }
-        }
-    });
-
-    $('.my-modal').css('display','block');
-
-    $('.my-modal-dialog').click(e => e.stopPropagation());
-    $('.my-modal').click(function(e){
-        hideModal( $(this) );
-        $('.video-modal .my-modal-video').html('<div id="modal-video-iframe"></div>');
-    });
-
-    $('.my-modal-close, .js-modal-close').click(function(e){
-        e.preventDefault();
-
-        hideModal( $(this).closest('.my-modal') );
-        $('.video-modal .my-modal-video').html('<div id="modal-video-iframe"></div>');
-    });
-
-    $('[data-video-modal]').click(function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-
-        let videoId = $(this).data('video-modal');
-        let videoType = $(this).data('video-type');
-
-        if (videoType == 'youtube') {
-            $('#modal-video-iframe').removeClass('vimeo youtube mp4').addClass('youtube').append('<div class="video-iframe" id="' + videoId + '"></div>');
-            createVideo(videoId, videoId);
-        } else if (videoType == 'vimeo') {
-            $('#modal-video-iframe').removeClass('vimeo youtube mp4').addClass('vimeo').html('<iframe class="video-iframe" allow="autoplay" src="https://player.vimeo.com/video/' + videoId + '?playsinline=1&autoplay=1&transparent=1&app_id=122963">');
-        } else if (videoType == 'mp4'){
-            $('#modal-video-iframe').removeClass('vimeo youtube mp4').addClass('vimeo').html(`<video src="${videoId}" playsinline autoplay controls></video>`);
-        }
-
-        hideModal('.my-modal');
-
-        showModal("#video-modal");
-    });
-
-    // Tabs
-    function goToTab(tabId, handler){
-        if (handler == undefined) {
-            handler = false;
-        }
-
-        let dest = $( tabId );
-        dest.stop().fadeIn(300).siblings().hide(0);
-
-        $('[data-tab="'+tabId+'"]').addClass('current').siblings().removeClass('current');
+    if (!videoId) {
+        videoId = $(this).data('video-id');
     }
 
-    $("[data-tab]").click(function(e){
-        e.preventDefault();
-        let dest = $(this).data('tab');
+    if (videoId == undefined) {
+        $(this).find('video')[0].play();
+    } else{
+        let videoType = $(this).data('video-type') ? $(this).data('video-type').toLowerCase() : 'youtube';
 
-        goToTab(dest, $(this));
-
-        // $(dest).find('.slick-slider').slick('setPosition');
-    });
-
-    $(".help-you__buttons-wrap, .tabs-nav").each(function(i, el){
-        $(el).find('[data-tab]').eq(0).click();
-    });
-
-    $('.tabs-select').on('change', function(){
-        goToTab($(this).val());
-    });
+        if (videoType == 'youtube') {
+            $(this).find('.block-video-container').append('<div class="video-iframe" id="'+videoId+'"></div>');
+            createVideo(videoId, videoId);
+        } else if(videoType == 'vimeo'){
+            $(this).find('.block-video-container').append('<div class="video-iframe" id="'+videoId+'"><iframe allow="autoplay" class="video-iframe" src="https://player.vimeo.com/video/'+videoId+'?playsinline=1&autoplay=1&transparent=0&app_id=122963"></div>');
+        }
+    }
+});
 })
 
 const swiper = new Swiper('.trusted-section__slider', {
@@ -194,7 +129,7 @@ const swiper = new Swiper('.trusted-section__slider', {
             slidesPerView: 1.5,
             spaceBetween: 35,
         },
-        1200: {
+        992: {
             centeredSlides: true,
             slidesPerView: 2,
             spaceBetween: 40,
@@ -259,8 +194,15 @@ const swiper = new Swiper('.trusted-section__slider', {
 
 
   $('.big-search-sect__item-arrow').click(function(){
-      $('.big-search-sect__item').removeClass('opened');
-      $(this).parent('.big-search-sect__item-header').parent('.big-search-sect__item').toggleClass('opened')
+
+
+    if($(this).parent('.big-search-sect__item-header').parent('.big-search-sect__item').hasClass('opened')){
+        $(this).parent('.big-search-sect__item-header').parent('.big-search-sect__item').removeClass('opened')
+    }else{
+        $('.big-search-sect__item').removeClass('opened')
+        $(this).parent('.big-search-sect__item-header').parent('.big-search-sect__item').removeClass('opened')
+    }
+    
 })
 
 
@@ -312,11 +254,17 @@ $('.header__search-btn').click(function(){
 })
 
 $(".help-you__btn").mouseenter(function(){       
-    $(this).addClass("hovered").find('.help-you__btn-gif img').attr("src",$(this).find('.help-you__btn-gif img').attr('data-gif'));
+    $(this).addClass("hovered")
+    .find('.help-you__btn-gif img').attr("src", function(index, attr){
+    return attr.replace("svg", "gif");   
+    })
 })  
 
-$(".help-you__btn").mouseleave(function(){
-    $(this).addClass("hovered").find('.help-you__btn-gif img').attr("src",$(this).find('.help-you__btn-gif img').attr('data-icon'));
+$(".help-you__btn").mouseleave(function(){       
+    $(this).removeClass("hovered")
+    .find('.help-you__btn-gif img').attr("src", function(index, attr){
+    return attr.replace("gif", "svg");   
+    })
 })
     
 $('.header__menu-btn').click(function(){
@@ -324,24 +272,15 @@ $('.header__menu-btn').click(function(){
     return false;
 })
 
-// $('.top-input').on('change focus keyup click mouseover', function(){
-//     $(this).parent().addClass('opened');
-//     }).on('blur mouseleave',function(){
-//         $(this).parent().removeClass('opened');
-// })
 
 
-$('.big-search-sect__forms-wrapper:not(.filter) input').on('keyup', function(){
+$('.top-input').on('keyup', function(){
     if($(this).val().length > 1){
         $(this).parent().addClass('opened');
     }
     else{
         $(this).parent().removeClass('opened');
     }
-})
-
-$('.big-search-sect__forms-wrapper.filter input').on('click', function(){
-    $(this).parent().toggleClass('opened')
 })
 
 $(document).mouseup(function (e){ 
@@ -362,8 +301,7 @@ $('.modal .close').click(function(){
 })
 
 $('.big-search-sect__item-hidden-bottom-slide-pic .wrapper').click(function(){
-    $('.'+$(this).attr('id')).fadeIn();
-    // $('.modal').fadeIn();
+    $('.modal').fadeIn();
     $('body').addClass('modal-opened')
 })
 
@@ -375,40 +313,3 @@ $(document).mouseup(function (e){
             $('body').removeClass('modal-opened')
     }
 });
-
-
-
-
-function getScrollWidth() {
-    // create element with scroll
-    let div = document.createElement('div');
-
-    div.style.overflowY = 'scroll';
-    div.style.width = '50px';
-    div.style.height = '50px';
-
-    document.body.append(div);
-    let scrollWidth = div.offsetWidth - div.clientWidth;
-
-    div.remove();
-
-    return scrollWidth;
-}
-
-let bodyScrolled = 0;
-
-function showModal(modal) {
-    $(modal).addClass('visible');
-    bodyScrolled = $(window).scrollTop();
-    $('body').addClass('modal-visible')
-        .scrollTop(bodyScrolled)
-        .css('padding-right', getScrollWidth());
-}
-
-function hideModal(modal) {
-    $(modal).removeClass('visible');
-    bodyScrolled = $(window).scrollTop();
-    $('body').removeClass('modal-visible')
-        .scrollTop(bodyScrolled)
-        .css('padding-right', 0);
-}
