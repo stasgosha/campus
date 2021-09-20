@@ -9,14 +9,14 @@ body{
     color: $gray;
 }
 
-*, div, a, span, section, p,{
+*, div, a, span, section, p{
     box-sizing: border-box;
     outline: 0!important;
     &:focus{
         outline: 0!important;
     }
     &:active{
-        outline: 0!important
+        outline: 0!important;
     }
 }
 *:focus, *:active, *:focus-within{
@@ -136,7 +136,7 @@ header{
             will-change: transform;
             transition: transform .5s ease;
             transform: translateY(-125%);
-            box-shadow: 0 10px 10px rgba(#000, 30%);
+            box-shadow: 0 10px 10px rgb(0 0 0 / 30%);
         }
         .header__bottom_logo{
             @media (max-width: 991px){
@@ -325,7 +325,7 @@ body.menu-opened .header__wrapper:not(.mobile){
         left: 0;
         background: #fff;
         border-radius: 8px;
-        box-shadow: -2px 14px 20px 7px rgba(0, 0, 0, 38%);
+        box-shadow: -2px 14px 20px 7px rgb(0 0 0 / 38%);
         color: #000;
         overflow: hidden;
         li{
@@ -333,7 +333,7 @@ body.menu-opened .header__wrapper:not(.mobile){
             width: 100%;
             transition: background .3s ease;
             &.current{
-                background: rgba(24, 120, 197, 10%);
+                background: rgb(24 120 197 / 10%);
             }
             &:hover{
                 background: $blue;
@@ -377,7 +377,7 @@ body.menu-opened .header__wrapper:not(.mobile){
     right: 0;
     background: #fff;
     border-radius: 8px;
-    box-shadow: -2px 14px 20px 7px rgba(0, 0, 0, 38%);
+    box-shadow: -2px 14px 20px 7px rgb(0 0 0 / 38%);
     color: #000;
     overflow: hidden;
     &__wrapper{
@@ -743,6 +743,9 @@ body.menu-opened .header__wrapper:not(.mobile){
             left: 50%;
             transform: translateX(-50%);
             margin-left: -11px;
+        }
+        @media (max-width: 370px){
+            margin-left: 5px;
         }
     }
 
@@ -1232,10 +1235,6 @@ body.menu-opened .header__wrapper:not(.mobile){
         padding-right: 59px;
         transition: background .3s ease, color .3s ease;
         position: relative;
-        display: flex;
-        appearance: none;
-        cursor: pointer;
-        background: transparent;
         @media (max-width: 991px){
             margin: 0 auto 30px;
             display: block;
@@ -1421,7 +1420,7 @@ body.menu-opened .header__wrapper:not(.mobile){
                 line-height: 38px;
                 letter-spacing: -0.5px;
                 max-width: 182px;
-                margin: -60px auto 79px;
+                margin: -30px auto 79px;
             }
         }
     }
@@ -1444,7 +1443,7 @@ body.menu-opened .header__wrapper:not(.mobile){
             height: auto;
             width: 37px;
             left: 11px;
-            top: 33px;
+            top: 55px;
             right: 0;
             margin: auto;
         }
@@ -2608,7 +2607,7 @@ body.menu-opened .header__wrapper:not(.mobile){
 }
 
 .footer{
-    padding-bottom: 200px;
+    padding-bottom: 50px;
     .container{
         display: flex;
         justify-content: space-between;
@@ -2674,7 +2673,7 @@ body.menu-opened .header__wrapper:not(.mobile){
             }
         }
         &:hover{
-            box-shadow: -1px 4px 20px 12px rgba(111, 117, 131, 45%);
+            box-shadow: -1px 4px 20px 12px rgb(111 117 131 / 45%);
             &:before{
                 transform: translateY(12px)
             }
@@ -3245,7 +3244,6 @@ body.menu-opened{
         font-weight: 800;
         margin-top: 53px;
         z-index: 2;
-        transform: translateY(80px);
         @media (max-width: 1200px){
             max-width: 100%;
             text-align: center;
@@ -3465,7 +3463,7 @@ body.menu-opened{
         content: "";
         z-index: -1;
         @media (max-width: 525px){
-            // background: url(../img/integrations-bottom_bg_m.svg)no-repeat top;
+            background: url(../img/integrations-bottom_bg_m.svg)no-repeat top;
             height: 52px;
             margin: 0 auto;
             bottom: 0;
@@ -3727,28 +3725,6 @@ body.menu-opened{
                 width: 25px;
                 height: 25px;
                 transform: rotate(90deg);
-            }
-            select{
-                appearance: none;
-                border-radius: 0;
-                border: 0;
-                position: absolute;
-                background: #fff;
-                top: 0;
-                left: 0;
-                display: block;
-                border: none;
-                width: 100%;
-                height: 100%;
-                padding: 0 55px 0 20px;
-                margin: 0;
-                font-weight: 600;
-                z-index: 6;
-                font-family: inherit;
-                @media (max-width: 750px){
-                    text-align: center;
-                    padding: 0 55px;
-                }
             }
             &.opened{
                 svg{
@@ -4612,7 +4588,7 @@ body.menu-opened{
     }
     @media (max-width: 991px){
       padding: 96px 0px 50px 82px;
-      width: calc(100% - 14px * 2);
+      width: 70%;
       margin: 0 auto;
       margin-top: -50px;
     }
@@ -4835,13 +4811,11 @@ body.menu-opened{
       top: 46%;
       left: 18.3%;
       z-index: 21;
-      background: #fff;
     }
     .how-help-sect__phone-next {
       top: 46%;
       right: 18.3%;
       z-index: 21;
-      background: #fff;
     }
   }
   .slide_item {
@@ -4892,7 +4866,7 @@ body.menu-opened{
     }
   }
   .inner_slider-section {
-    @media (max-width: 1199px) {
+    @media (max-width: 991px) {
       display: none;
     }
   }
@@ -5772,6 +5746,10 @@ body.menu-opened{
 		}
 	}
 
+	// @media screen and (max-width: 1199px){
+	// 	padding: 10px;
+	// }
+
 	@media screen and (max-width: 575px){
 		.block-caption{
 			font-size: 13px;
@@ -5814,243 +5792,3 @@ body.menu-opened{
         }
     } 
  }
-
-
- .header-nav ul{
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    line-height: 14px;
-    @media (max-width: 991px){
-        flex-direction: column;
-        width: 100%;
-        align-items: flex-start;
-    }
-}
-.header-nav li{
-    display: block;
-}
-.header-nav li a{
-    display: block;
-    width: 100%;
-}
-
-.visually-hidden{
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    margin: -1px;
-    border: 0;
-    padding: 0;
-    clip: rect(0 0 0 0);
-    overflow: hidden;
-}
-
-
-
-.my-modal{
-    width: 100%;
-    height: 100vh;
-    position: fixed;
-    left: 0;
-    top: 0;
-    background: rgba(#000, .28);
-    overflow-y: auto;
-    overflow-x: hidden;
-    overscroll-behavior-y: contain;
-    z-index: 999;
-    // transform: scale(0);
-    visibility: hidden;
-    transition: visibility .4s, opacity .4s;
-    cursor: pointer;
-    opacity: 0;
-    pointer-events: none;
-
-    .my-modal-dialog{
-        width: calc(100% - 15px * 2);
-        max-width: 1170px;
-        margin: 70px auto;
-        cursor: default;
-        flex: none;
-        position: relative;
-        transform: translateY(-100%);
-        opacity: 0;
-        visibility: hidden;
-        transition: all $t;
-        transition-delay: .2s;
-    }
-
-    &.visible{
-        visibility: visible;
-        opacity: 1;
-        pointer-events: auto;
-
-        .my-modal-dialog{
-            transform: translateY(0);
-            opacity: 1;
-            visibility: visible;
-        }
-    }
-
-    &.video-modal{
-        .my-modal-dialog{
-            width: auto;
-            max-width: 70vw;
-
-            @media screen and (max-width: 1023px){
-                max-width: 90vw;
-            }
-        }
-
-        .my-modal-content{
-            background: transparent;
-            padding: 0;
-        }
-
-        .my-modal-video{
-            width: 100%;
-            position: relative;
-
-            &:before{
-                content: '';
-                display: block;
-                padding-top: 56.25%;
-            }
-
-            iframe,
-            video{
-                width: 100%;
-                height: 100%;
-                position: absolute;
-                left: 0;
-                top: 0;
-                display: block;
-                border: 0;
-            }
-
-            &.vimeo{
-                &:before{
-                    padding-top: 52%;
-                }
-            }
-        }
-    }
-
-    .my-modal-content{
-        background: #fff;
-        border-radius: $r;
-        position: relative;
-        padding: 60px 100px;
-    }
-
-    .my-modal-text{
-        text-align: center;
-    }
-
-    &.small{
-        .my-modal-dialog{
-            max-width: 420px;
-        }
-
-        .my-modal-content{
-            padding: 40px 50px 50px;
-
-            @media screen and (max-width: 575px){
-                padding: 40px 30px 50px;
-            }
-        }
-    }
-
-    @media screen and (max-width: 1229px){
-        .my-modal-content{
-            padding: 40px 30px;
-        }
-    }
-
-    @media screen and (max-width: 575px){
-        .my-modal-content{
-            padding-left: 20px;
-            padding-right: 20px;
-        }
-    }
-}
-
-.my-modal-close{
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 44px;
-    height: 44px;
-    // border-radius: 50%;
-    opacity: 1;
-    transition: all $t;
-    appearance: none;
-    background: transparent;
-    border: 0;
-    cursor: pointer;
-
-    &:before,
-    &:after{
-        content: '';
-        display: block;
-        width: 20px;
-        height: 2px;
-        background: #000;
-        position: absolute;
-        left: calc(50% - 20px / 2);
-        top: calc(50% - 2px / 2);
-        transition: all $t;
-        border-radius: 1px;
-    }
-
-    &:before{
-        transform: rotate(-45deg);
-    }
-
-    &:after{
-        transform: rotate(45deg);
-    }
-
-    &:hover{
-        &:before,
-        &:after{
-            background: $primary;
-        }
-    }
-
-    .video-modal &{
-        left: 100%;
-        top: -14px;
-        right: auto;
-
-        &:before,
-        &:after{
-            background: #fff;
-        }
-
-        &:hover{
-            &:before,
-            &:after{
-                background: $primary;
-            }
-        }
-
-        @media screen and (max-width: 767px){
-            top: auto;
-            bottom: 100%;
-            right: -17px;
-            left: auto;
-        }
-    }
-}
-
-body{
-    position: relative;
-
-    &.modal-visible{
-        overflow: hidden;
-        height: 100vh;
-    }
-}
